@@ -1,0 +1,26 @@
+Méthode à suivre pour lancer le projet :
+
+- Installer Node JS :
+
+		Version requise : 20.11.1
+		
+
+- Installer Maven.
+-Vérifier la présence de la JVM installée.
+		Exécuter les commandes suivantes dans l'invite de commande :
+
+		- npm install
+		- npm install -g @angular/cli
+		-Get-ExecutionPolicy
+                -Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+- Préparer la base de données locale :
+
+		Une BDD locale doit être configurée sur MySQL en appliquant le script, chemin "API/BDD_script.sql" par exemple sur wamp
+
+- Exécuter les PowerShell :
+		- Lancement IHM
+		
+		- Lancement API si il votre pc ne le permet pas ,run le main du package spintowin
+
+		

@@ -1,0 +1,39 @@
+import javax.websocket.*;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+@ServerEndpoint("/number")
+public class NumberWebSocket {
+
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    @OnOpen
+    public void onOpen(Session session) {
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                int randomNumber = (int) (Math.random() * 100);
+                session.getBasicRemote().sendText(String.valueOf(randomNumber));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }, 0, 10, TimeUnit.SECONDS);
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        scheduler.shutdown();
+    }
+
+    @OnError
+    public void onError(Session session, Throwable throwable) {
+        throwable.printStackTrace();
+    }
+
+    @OnMessage
+    public void onMessage(String message, Session session) {
+        // Optionnel, gérer les messages reçus du client
+    }
+}

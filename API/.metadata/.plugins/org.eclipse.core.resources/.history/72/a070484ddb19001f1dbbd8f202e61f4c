@@ -1,0 +1,56 @@
+package WebGestion;
+
+import spintowin.Joueur;
+
+public class Salon {
+    private int identifiantSalon;
+    private Joueur[] joueurs; // Corrected the declaration of the Joueur array
+    private int nbJoueurEnLigne;
+
+    public Salon(int identifiantSalon) {
+        this.identifiantSalon = identifiantSalon;
+        this.joueurs = new Joueur[10]; // Initialize the array with a fixed size of 10
+        this.nbJoueurEnLigne = 0; // Initially, there are no players in the salon
+    }
+
+    public int getIdentifiantSalon() {
+        return identifiantSalon;
+    }
+
+    public void setIdentifiantSalon(int identifiantSalon) {
+        this.identifiantSalon = identifiantSalon;
+    }
+
+    public Joueur[] getJoueurs() {
+        return joueurs;
+    }
+
+    public int getNbJoueurEnLigne() {
+        return nbJoueurEnLigne;
+    }
+
+    // Method to add a player to the salon
+    public void ajouterJoueur(Joueur joueur) {
+        if (nbJoueurEnLigne < joueurs.length) {
+            joueurs[nbJoueurEnLigne++] = joueur;
+        } else {
+            System.out.println("Le salon est plein.");
+        }
+    }
+
+    // Method to remove a player from the salon
+    public void retirerJoueur(Joueur joueur) {
+        for (int i = 0; i < nbJoueurEnLigne; i++) {
+            if (joueurs[i].equals(joueur)) {
+                // Shift elements to the left to fill the gap
+                for (int j = i; j < nbJoueurEnLigne - 1; j++) {
+                    joueurs[j] = joueurs[j + 1];
+                }
+                joueurs[nbJoueurEnLigne - 1] = null; // Remove the last element
+                nbJoueurEnLigne--; // Decrement the player count
+                return;
+            }
+        }
+        System.out.println("Le joueur n'est pas présent dans le salon.");
+    }
+}

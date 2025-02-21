@@ -1,0 +1,6 @@
+package spintowin;
+public class RandomNumber {
+	
+	
+	random.nextInt(37);
+}

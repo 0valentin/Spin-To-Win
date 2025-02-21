@@ -1,0 +1,41 @@
+package WebGestion;
+
+import spintowin.Joueur;
+import java.util.Date; // Import de la classe Date
+
+public class Main3 {
+    public static void main(String[] args) {
+        GestionSalons gestionSalons = new GestionSalons();
+        
+        // Ajouter des joueurs avec des informations spécifiques
+        for (int i = 1; i <= 11; i++) { // Ajout de 11 joueurs
+            Joueur joueur = new Joueur(i, "Pseudo" + i, "Nom" + i, "Prenom" + i, "email" + i + "@example.com", new Date(), 100); // Création d'un joueur avec des informations spécifiques
+            gestionSalons.ajouterJoueur(joueur);
+        }
+        
+        // Afficher les salons et les joueurs
+        for (Salon salon : gestionSalons.getSalons()) {
+            System.out.println("Salon ID: " + salon.getIdentifiantSalon());
+            for (Joueur joueur : salon.getJoueurs()) {
+                if (joueur != null) {
+                    System.out.println(" - " + joueur.getNom());
+                }
+            }
+        }
+
+        // Retirer un joueur d'un salon spécifique
+        int identifiantSalon = 1; // Remplacez par l'identifiant du salon à partir duquel vous voulez retirer le joueur
+        Joueur joueurARetirer = gestionSalons.getSalon(identifiantSalon).getJoueurs()[0]; // Remplacez par le joueur que vous voulez retirer
+        gestionSalons.retirerJoueurDuSalon(identifiantSalon, joueurARetirer);
+
+        // Afficher les salons et les joueurs après avoir retiré le joueur
+        for (Salon salon : gestionSalons.getSalons()) {
+            System.out.println("Salon ID: " + salon.getIdentifiantSalon());
+            for (Joueur joueur : salon.getJoueurs()) {
+                if (joueur != null) {
+                    System.out.println(" - " + joueur.getNom());
+                }
+            }
+        }
+    }
+}
